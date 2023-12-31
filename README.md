@@ -6,11 +6,32 @@
 ## 2. Identify cell line expression of key E3 ubiquitin ligases for PROTAC development
 ## 3. Identify the 'best' E3 ubiquitin ligase for a pair of drug targets
 
-# Firstly need to import required packages and then tissue expression data from the human genome atlas.
+# Firstly need to import required packages and then tissue expression data from the human genome atlas:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import torch
 
-# 1. We can then look at the expression of any E3 ligase of our choosing and print these. Initially we will look at those currently enabled with at least moderate affinity (KD < 1 uM) reversibly binding small molecule ligands: "CRBN", "VHL", "BIRC2", "XIAP", "MDM2", "KEAP1", "DCAF1", "DCAF15".
+## Importing data in TSV format from protein genome atlas ##
 
-# 2. We can then repeat the exceriseat the cellular level, importing cellular expression data from the human genome atlas. The same genes can then be investigated and printed. 
+r_filenameTSV = 'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip'
+w_filenameTSV = 'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip'
+tsv_read_Tissue = pd.read_csv(r_filenameTSV, sep='\t')
+print(tsv_read_Tissue.head(10))
+
+# 1. We can then look at the expression of any E3 ligase of our choosing and print these. Initially we will look at those currently enabled with at least moderate affinity (KD < 1 uM) reversibly binding small molecule ligands: "CRBN", "VHL", "BIRC2", "XIAP", "MDM2", "KEAP1", "DCAF1", "DCAF15"
+
+## Review cellular expression profile of E3 ligases prospectively discovered as effectors of degradation: FBXL12, FBXL15, KLHDC2, KLHL6, STUB1, ZER1, PRAME, GID8.
+compare_list_expression(["CRBN", "VHL", "BIRC2", "XIAP", "MDM2", "KEAP1", "DCAF1", "DCAF15"] , tsv_read_Tissue)
+
+# 2. We can then repeat the exceriseat the cellular level, importing cellular expression data from the human genome atlas. The same genes can then be investigated and printed:
+## Importing data in TSV format from protein genome atlas ##
+
+r_rna_single_cellTSV = 'https://www.proteinatlas.org/download/rna_single_cell_type.tsv.zip'
+w_rna_single_cellTSV = 'https://www.proteinatlas.org/download/rna_single_cell_type.tsv.zip'
+tsv_read_single_cell = pd.read_csv(r_rna_single_cellTSV, sep='\t')
+print(tsv_read_single_cell.head(10))
 
 # We now have both tissue and cellular expression data available to be analysed and with which we will investigate ligases prospectively discovered as effectors of degradation: "FBXL12", "FBXL15", "KLHDC2", "KLHL6", "STUB1", "ZER1", "PRAME", "GID8".
 
